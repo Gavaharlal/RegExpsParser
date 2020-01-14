@@ -18,10 +18,10 @@ class Parser() {
         val result: Tree
         result = when (token.tokenType) {
             OPEN_BRACKET, CHARACTER -> {
-                // E -> T E`
-                val t: Tree = t()
-                val eP: Tree = ePrime()
-                Tree("E", true, t, eP)
+                // E -> P T`
+                val p: Tree = p()
+                val tP: Tree = tPrime()
+                Tree("E", true, p, tP)
             }
             else -> throw Error()
         }
@@ -38,12 +38,11 @@ class Parser() {
                 val eP: Tree = ePrime()
                 Tree("E'", true, t, eP)
             }
-            CLOSE_BRACKET, END -> {
+            CLOSE_BRACKET, CHOOSE, END -> {
                 // E' -> eps
                 Tree("E'", true)
             }
             else -> throw Error()
-
         }
         return result
     }
@@ -53,10 +52,10 @@ class Parser() {
         val result: Tree
         result = when (token.tokenType) {
             OPEN_BRACKET, CHARACTER -> {
-                // T -> P T'
-                val p: Tree = p()
-                val tP: Tree = tPrime()
-                Tree("T", true, p, tP)
+                // T -> F P'
+                val f: Tree = f()
+                val pP: Tree = pPrime()
+                Tree("T", true, f, pP)
             }
             else -> throw Error()
         }
@@ -74,12 +73,11 @@ class Parser() {
                 val tP: Tree = tPrime()
                 Tree("T'", true, Tree("|", false), p, tP)
             }
-            CLOSE_BRACKET, OPEN_BRACKET, CHARACTER, END -> {
+            CLOSE_BRACKET, END -> {
                 // T' -> eps
                 Tree("T'", true)
             }
             else -> throw Error()
-
         }
         return result
     }
@@ -89,10 +87,10 @@ class Parser() {
         val result: Tree
         result = when (token.tokenType) {
             OPEN_BRACKET, CHARACTER -> {
-                // P -> F P'
-                val f: Tree = f()
-                val pP: Tree = pPrime()
-                Tree("P", true, f, pP)
+                // P -> T E'
+                val t: Tree = t()
+                val eP: Tree = ePrime()
+                Tree("P", true, t, eP)
             }
             else -> throw Error()
         }
@@ -104,9 +102,10 @@ class Parser() {
         val result: Tree?
         result = when (token.tokenType) {
             CLOSURE -> {
-                // P' -> *
+                // P' -> * P'
                 lexer.next()
-                Tree("P'", true, Tree("*", false))
+                val pP: Tree = pPrime()
+                Tree("P'", true, Tree("*", false), pP)
             }
             //$,c,(,|,)
             END, CHARACTER, OPEN_BRACKET, CHOOSE, CLOSE_BRACKET -> {
@@ -138,3 +137,27 @@ class Parser() {
         return result
     }
 }
+
+// E -> P T'
+//T' -> eps
+//T' -> | P T'
+//P -> T E'
+//E' -> eps
+//E' -> T E'
+//T -> F P'
+//P' -> eps
+//P' -> * P'
+//F -> c
+//F -> ( E )
+
+//E -> T E'
+//E' -> eps
+//E' -> T E'
+//T -> P T'
+//T' -> eps
+//T' -> | P T'
+//P -> F P'
+//P' -> eps
+//P' -> * P'
+//F -> c
+//F -> ( E )

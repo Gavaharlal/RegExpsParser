@@ -25,14 +25,19 @@ public class GraphTest {
         testInput = "a*bc"; // P -> F*
         check(testInput);
 
-        testInput = "a(c)"; // F -> (E)
+        testInput = "a(cb)"; // F -> (E)
+        check(testInput);
+
+        testInput = "a***"; // P -> P *
         check(testInput);
     }
 
     @Test
     public void randomTests() {
-        int n = 100;
+        int n = 50;
         for (int i = 0; i < n; i++) {
+            System.out.println("===============================");
+            System.out.println("generating test");
             String expected = ExpressionGenerator.generate();
             System.out.println("checking: " + expected);
             check(expected);

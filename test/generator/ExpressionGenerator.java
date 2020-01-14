@@ -5,6 +5,14 @@ import java.util.stream.Collectors;
 
 public class ExpressionGenerator {
 
+    // E -> E T
+    // E -> T
+    // T -> T | P
+    // T -> P
+    // P -> F *
+    // P -> F
+    // F -> C
+    // F -> (E)
 
     public static String generate() {
         Rule[] rules = new Rule[8];
@@ -14,7 +22,7 @@ public class ExpressionGenerator {
         rules[3] = new Rule(TermToken.T, new ArrayList<>(Collections.singletonList(TermToken.P)));
         rules[4] = new Rule(TermToken.P, new ArrayList<>(Arrays.asList(TermToken.F, new NotTerm("*"))));
         rules[5] = new Rule(TermToken.P, new ArrayList<>(Collections.singletonList(TermToken.F)));
-        rules[6] = new Rule(TermToken.F, new ArrayList<>(Collections.singletonList(TermToken.N)));
+        rules[6] = new Rule(TermToken.F, new ArrayList<>(Collections.singletonList(TermToken.C)));
         rules[7] = new Rule(TermToken.F, new ArrayList<>(Arrays.asList(new NotTerm("("), TermToken.E, new NotTerm(")"))));
 
         Map<TermToken, List<Rule>> rulesMap = new HashMap<>();
@@ -41,7 +49,7 @@ public class ExpressionGenerator {
                     Rule chosenRule;
                     if (curTerm == TermToken.F){
                         double prob = Math.random();
-                        if (prob < 0.25) {
+                        if (prob < 0.18) {
                             chosenRule = rulesMap.get(curTerm).get(1);
                         } else {
                             chosenRule = rulesMap.get(curTerm).get(0);
@@ -53,7 +61,7 @@ public class ExpressionGenerator {
 
                     for (Token token : chosenRule.getDestination()) {
                         if (token instanceof TermToken) {
-                            if (token == TermToken.N) {
+                            if (token == TermToken.C) {
                                 int ranNum = random.nextInt(15);
                                 token = new NotTerm(Character.toString((char) (ranNum + 'a')));
                             } else {

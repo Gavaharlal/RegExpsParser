@@ -1,0 +1,136 @@
+digraph PresenterGraph {
+	"E0" [label="E"]
+	"P0" [label="P"]
+	"T0" [label="T"]
+	"F0" [label="F"]
+	"a0" [label="a", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F0" -> "a0"
+
+	"T0" -> "F0"
+	"P'0" [label="P'"]
+
+	"T0" -> "P'0"
+
+	"P0" -> "T0"
+	"E'0" [label="E'"]
+	"T1" [label="T"]
+	"F1" [label="F"]
+	"b0" [label="b", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F1" -> "b0"
+
+	"T1" -> "F1"
+	"P'1" [label="P'"]
+
+	"T1" -> "P'1"
+
+	"E'0" -> "T1"
+	"E'1" [label="E'"]
+	"T2" [label="T"]
+	"F2" [label="F"]
+	"c0" [label="c", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F2" -> "c0"
+
+	"T2" -> "F2"
+	"P'2" [label="P'"]
+
+	"T2" -> "P'2"
+
+	"E'1" -> "T2"
+	"E'2" [label="E'"]
+
+	"E'1" -> "E'2"
+
+	"E'0" -> "E'1"
+
+	"P0" -> "E'0"
+
+	"E0" -> "P0"
+	"T'0" [label="T'"]
+	"|0" [label="|", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"T'0" -> "|0"
+	"P1" [label="P"]
+	"T3" [label="T"]
+	"F3" [label="F"]
+	"d0" [label="d", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F3" -> "d0"
+
+	"T3" -> "F3"
+	"P'3" [label="P'"]
+
+	"T3" -> "P'3"
+
+	"P1" -> "T3"
+	"E'3" [label="E'"]
+	"T4" [label="T"]
+	"F4" [label="F"]
+	"e0" [label="e", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F4" -> "e0"
+
+	"T4" -> "F4"
+	"P'4" [label="P'"]
+	"*0" [label="*", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"P'4" -> "*0"
+	"P'5" [label="P'"]
+	"*1" [label="*", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"P'5" -> "*1"
+	"P'6" [label="P'"]
+
+	"P'5" -> "P'6"
+
+	"P'4" -> "P'5"
+
+	"T4" -> "P'4"
+
+	"E'3" -> "T4"
+	"E'4" [label="E'"]
+	"T5" [label="T"]
+	"F5" [label="F"]
+	"f0" [label="f", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F5" -> "f0"
+
+	"T5" -> "F5"
+	"P'7" [label="P'"]
+
+	"T5" -> "P'7"
+
+	"E'4" -> "T5"
+	"E'5" [label="E'"]
+	"T6" [label="T"]
+	"F6" [label="F"]
+	"g0" [label="g", style="filled", fillcolor="blue", fontcolor="#FFFFFF"]
+
+	"F6" -> "g0"
+
+	"T6" -> "F6"
+	"P'8" [label="P'"]
+
+	"T6" -> "P'8"
+
+	"E'5" -> "T6"
+	"E'6" [label="E'"]
+
+	"E'5" -> "E'6"
+
+	"E'4" -> "E'5"
+
+	"E'3" -> "E'4"
+
+	"P1" -> "E'3"
+
+	"T'0" -> "P1"
+	"T'1" [label="T'"]
+
+	"T'0" -> "T'1"
+
+	"E0" -> "T'0"
+
+}
