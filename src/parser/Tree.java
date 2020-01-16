@@ -1,4 +1,4 @@
-package parser.lexer;
+package parser;
 
 import com.sun.istack.internal.NotNull;
 

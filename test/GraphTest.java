@@ -1,19 +1,23 @@
 import generator.ExpressionGenerator;
 import org.junit.Assert;
 import org.junit.Test;
-import parser.parser.Parser;
+import parser.LexingException;
+import parser.ParsingException;
+import parser.RegExpsGrammarLexer;
+import parser.RegExpsGrammarParser;
 
 public class GraphTest {
 
-    private final Parser parser = new Parser();
+    private RegExpsGrammarParser parser;
 
     @Test
-    public void standardTests() {
+    public void standardTests() throws ParsingException, LexingException {
         String testInput;
         String result;
 
         testInput = "c"; // F -> c
-        result = parser.parse(testInput).toString();
+        parser = new RegExpsGrammarParser(new RegExpsGrammarLexer(testInput));
+        result = parser.mainRule().toString();
         Assert.assertEquals(testInput, result);
 
         testInput = "cvcdf"; // E -> E T
@@ -33,7 +37,7 @@ public class GraphTest {
     }
 
     @Test
-    public void randomTests() {
+    public void randomTests() throws ParsingException, LexingException {
         int n = 50;
         for (int i = 0; i < n; i++) {
             System.out.println("===============================");
@@ -45,8 +49,9 @@ public class GraphTest {
         }
     }
 
-    private void check(String input) {
-        String result = parser.parse(input).toString();
+    private void check(String input) throws ParsingException, LexingException {
+        parser = new RegExpsGrammarParser(new RegExpsGrammarLexer(input));
+        String result = parser.mainRule().toString();
         Assert.assertEquals(input, result);
     }
 }

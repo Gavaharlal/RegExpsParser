@@ -1,4 +1,4 @@
-import parser.lexer.Tree;
+import parser.Tree;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

@@ -1,4 +1,5 @@
-import parser.parser.Parser
+import parser.RegExpsGrammarLexer
+import parser.RegExpsGrammarParser
 
 fun main(args: Array<String>) {
 //    val input = "s(ss)";
@@ -7,8 +8,8 @@ fun main(args: Array<String>) {
 //    val expected = "(b*|(cde)|f)";
 
     val expected = "abc|de**fg";
-    val parser = Parser()
-    val result = parser.parse(expected)
+    val parser = RegExpsGrammarParser(RegExpsGrammarLexer(expected))
+    val result = parser.mainRule()
 
     println("expected: $expected")
     println("actual:   $result")
